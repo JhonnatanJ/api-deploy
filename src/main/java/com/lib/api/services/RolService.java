@@ -1,6 +1,7 @@
 package com.lib.api.services;
 
-import com.api.lib.entities.Rol;
+
+import com.lib.api.entities.Rol;
 
 import java.util.List;
 import java.util.Optional;

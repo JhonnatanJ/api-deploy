@@ -1,7 +1,7 @@
 package com.lib.api.controllers;
 
-import com.api.lib.entities.Usuario;
-import com.api.lib.services.UsuarioServiceImpl;
+import com.lib.api.entities.Usuario;
+import com.lib.api.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

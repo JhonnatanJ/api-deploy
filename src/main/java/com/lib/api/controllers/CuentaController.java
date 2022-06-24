@@ -1,8 +1,7 @@
 package com.lib.api.controllers;
 
-
-import com.api.lib.entities.Cuenta;
-import com.api.lib.services.CuentaServiceImpl;
+import com.lib.api.entities.Cuenta;
+import com.lib.api.services.CuentaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

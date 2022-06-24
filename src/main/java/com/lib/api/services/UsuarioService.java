@@ -1,7 +1,6 @@
 package com.lib.api.services;
 
-
-import com.api.lib.entities.Usuario;
+import com.lib.api.entities.Usuario;
 
 import java.util.List;
 import java.util.Optional;

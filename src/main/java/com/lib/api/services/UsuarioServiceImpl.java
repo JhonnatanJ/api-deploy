@@ -1,7 +1,7 @@
 package com.lib.api.services;
 
-import com.api.lib.entities.Usuario;
-import com.api.lib.repository.UsuarioRepository;
+import com.lib.api.entities.Usuario;
+import com.lib.api.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

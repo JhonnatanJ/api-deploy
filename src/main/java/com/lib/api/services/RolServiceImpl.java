@@ -1,7 +1,7 @@
 package com.lib.api.services;
 
-import com.api.lib.entities.Rol;
-import com.api.lib.repository.RolRepository;
+import com.lib.api.entities.Rol;
+import com.lib.api.repositories.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.lib.api.repositories;
 
-import com.api.lib.entities.Usuario;
+import com.lib.api.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

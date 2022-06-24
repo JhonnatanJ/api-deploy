@@ -1,7 +1,7 @@
 package com.lib.api.controllers;
 
-import com.api.lib.entities.Rol;
-import com.api.lib.services.RolServiceImpl;
+import com.lib.api.entities.Rol;
+import com.lib.api.services.RolServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

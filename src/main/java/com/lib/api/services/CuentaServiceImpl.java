@@ -1,8 +1,8 @@
 package com.lib.api.services;
 
-import com.api.lib.entities.Cuenta;
-import com.api.lib.repository.CuentaRepository;
-import com.api.lib.repository.RolRepository;
+import com.lib.api.entities.Cuenta;
+import com.lib.api.repositories.CuentaRepository;
+import com.lib.api.repositories.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
