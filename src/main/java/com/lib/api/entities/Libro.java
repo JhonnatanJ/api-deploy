@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,9 @@ public class Libro implements Serializable {
     @Column(name = "precio_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal PrecioUnitario;
 
+    @Column(name = "fecha_registro", nullable = false, updatable = false)
+    private LocalDate FechaRegistro;
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "libros_autores",
@@ -56,6 +60,14 @@ public class Libro implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_editorial")
     )
     private List<Editorial> editoriales;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "libros_cuenta",
+            joinColumns = @JoinColumn(name = "isbn"),
+            inverseJoinColumns = @JoinColumn(name = "id_cuenta", updatable = false)
+    )
+    private Cuenta cuenta;
 
 
 //-------------------------------------- MÉTODOS ---------------------

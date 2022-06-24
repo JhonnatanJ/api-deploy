@@ -1,18 +1,12 @@
 package com.lib.api.services;
 
-import com.lib.api.entities.Autor;
-import com.lib.api.entities.Editorial;
-import com.lib.api.entities.Genero;
-import com.lib.api.entities.Libro;
-import com.lib.api.repositories.AutorRepository;
-import com.lib.api.repositories.EditorialRepository;
-import com.lib.api.repositories.GeneroRepository;
-import com.lib.api.repositories.LibroRepository;
+import com.lib.api.entities.*;
+import com.lib.api.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.parser.Entity;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +21,9 @@ public class LibroServiceImpl implements LibroService {
     private GeneroRepository generoRepository;
     @Autowired
     private EditorialRepository editorialRepository;
+
+    @Autowired
+    private CuentaRepository cuentaRepository;
 
     @Override
     @Transactional
@@ -90,6 +87,14 @@ public class LibroServiceImpl implements LibroService {
                 }
             }
 
+            if(!cuentaRepository.findById(entity.getCuenta().getIdCuenta()).isEmpty()){
+                entity.setCuenta(cuentaRepository.findById(entity.getCuenta().getIdCuenta()).get());
+            }
+            else{
+                throw new Exception();
+            }
+
+            entity.setFechaRegistro(LocalDate.now());
             entity.AddEditoriales(editorialesVerif);
             entity.AddAutores(autoresVerif);
             entity.AddGeneros(generosVerif);
