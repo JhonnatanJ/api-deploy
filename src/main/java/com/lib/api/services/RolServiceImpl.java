@@ -55,8 +55,14 @@ public class RolServiceImpl implements RolService {
     @Transactional
     public Rol save(Rol entity) throws Exception {
         try{
-            entity = rolRepository.save(entity);
-            return entity;
+            if(rolRepository.findByNombre(entity.getNombre()).isPresent()) {
+                entity = rolRepository.findByNombre(entity.getNombre()).get();
+                entity = rolRepository.save(entity);
+                return entity;
+            }else{
+                entity = rolRepository.save(entity);
+                return entity;
+            }
         }
         catch (Exception e){
             throw new Exception(e.getMessage());

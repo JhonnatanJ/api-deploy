@@ -31,8 +31,8 @@ public class Libro implements Serializable {
     @Column(name = "stock", nullable = false)
     private String Stock;
 
-    @Column(name = "precio_unitario", nullable = false, precision = 10, scale = 2)
-    private BigDecimal PrecioUnitario;
+    @Column(name = "precio_unitario", nullable = false, scale = 2)
+    private Double PrecioUnitario;
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDate FechaRegistro;
