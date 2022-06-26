@@ -64,26 +64,15 @@ public class NotaVentaServiceImpl implements NotaVentaService {
     public NotaVenta save(NotaVenta entity) throws Exception {
         try{
             entity.setFechaRegistro(LocalDate.now());
-                System.out.println(entity.getCuenta().getIdCuenta());
             entity.setCuenta(cuentaRepository.findById(entity.getCuenta().getIdCuenta()).get());
-                System.out.println(entity.getCuenta().getIdCuenta()+" "+entity.getCuenta().getEmail());
-
             double valor_total = 0;
-
             for (Detalle detalle: entity.getDetalles() ) {
-                System.out.println(detalle.getLibro().getISBN());
-                System.out.println(libroRepository.findById(detalle.getLibro().getISBN()).get().getISBN());
                 detalle.setLibro(libroRepository.findById(detalle.getLibro().getISBN()).get());
-                System.out.println(detalle.getLibro().getISBN() + " " + detalle.getLibro().getTitulo());
-
-                detalle.setSubtotal(detalle.getLibro().getPrecioUnitario() * detalle.getCantidad());
-                System.out.println(detalle.getSubtotal());
-
+                detalle.setSubtotal(Math.round((detalle.getLibro().getPrecioUnitario() * detalle.getCantidad())*100.0)/100.0);
                 valor_total += detalle.getSubtotal();
             }
-                System.out.println(valor_total);
+            valor_total = Math.round(valor_total*100.0)/100.0;
             entity.setValorTotal(valor_total);
-
             entity = notaVentaRepository.save(entity);
             return entity;
         }
