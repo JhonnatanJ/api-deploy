@@ -13,4 +13,5 @@ public interface CuentaService {
     public Cuenta update(Long id, Cuenta entity) throws Exception;
     public boolean delete(Long id) throws Exception;
 
+    public boolean login(String email, String contrasena) throws Exception;
 }

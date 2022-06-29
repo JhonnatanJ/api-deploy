@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Libro implements Serializable {
     @Id
-    @Column(name = "ISBN", nullable = false, length = 10)
+    @Column(name = "ISBN", nullable = false, length = 13)
     private String ISBN;
 
     @Column(name = "titulo", nullable = false, length = 600)
@@ -29,7 +29,7 @@ public class Libro implements Serializable {
     private String Descripcion;
 
     @Column(name = "stock", nullable = false)
-    private String Stock;
+    private int Stock;
 
     @Column(name = "precio_unitario", nullable = false, scale = 2)
     private Double PrecioUnitario;

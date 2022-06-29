@@ -14,4 +14,9 @@ public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
             value = "SELECT c from Cuenta c WHERE  c.Email LIKE :email"
     )
     Optional<Cuenta> findByEmail(@Param("email") String email);
+
+    @Query(
+            value = "SELECT c from Cuenta c WHERE c.Email LIKE :email AND c.Contrasena LIKE :contrasena"
+    )
+    Optional<Cuenta> login(@Param("email") String email, @Param("contrasena") String contrasena);
 }

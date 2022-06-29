@@ -5,17 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface LibroRepository extends JpaRepository<Libro, String> {
     @Query(
-            value = "SELECT l FROM Libro l WHERE l.Titulo LIKE :nombre"
+            value = "SELECT l FROM Libro l WHERE l.Titulo LIKE %:nombre%"
     )
-    Libro findByNombre(@Param("nombre")  String nombre);
+    List<Libro> findByNombre(@Param("nombre")  String nombre);
 
     @Query(
             value = "select l.isbn, l.titulo, l.descripcion, l.stock, l.precio_unitario, g.nombre  \n" +

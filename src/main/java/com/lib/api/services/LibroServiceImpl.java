@@ -141,10 +141,10 @@ public class LibroServiceImpl implements LibroService {
     // -------------------------------------------- MÉTODOS ADICIONALES -------------------------------------------------------------------------------------
     @Override
     @Transactional
-    public Libro findByNombre(String nombre) throws Exception {
+    public List<Libro> findByNombre(String nombre) throws Exception {
         try{
-            Libro entity = libroRepository.findByNombre(nombre);
-            return entity;
+            List<Libro> entities = libroRepository.findByNombre(nombre);
+            return entities;
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

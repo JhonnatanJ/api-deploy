@@ -13,7 +13,7 @@ public interface LibroService {
     public boolean delete(String id) throws Exception;
 
 
-    public Libro findByNombre(String nombre) throws Exception;
+    public List<Libro> findByNombre(String nombre) throws Exception;
     public List<Libro> findByAutor(String autor) throws Exception;
     public List<Libro> findByGenero(String genero) throws Exception;
     public List<Libro> findByEditorial(String editorial) throws Exception;

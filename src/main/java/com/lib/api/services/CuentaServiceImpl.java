@@ -104,4 +104,17 @@ public class CuentaServiceImpl implements CuentaService {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public boolean login(String email, String contrasena) throws Exception {
+        try{
+            if(cuentaRepository.login(email, contrasena).isPresent()){
+                return true;
+            }else{
+                throw new Exception();
+            }
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }
