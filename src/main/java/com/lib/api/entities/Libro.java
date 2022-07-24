@@ -23,19 +23,19 @@ public class Libro implements Serializable {
     private String ISBN;
 
     @Column(name = "titulo", nullable = false, length = 600)
-    private String Titulo;
+    private String titulo;
 
     @Column(name = "descripcion",length = 5000)
-    private String Descripcion;
+    private String descripcion;
 
     @Column(name = "stock", nullable = false)
-    private int Stock;
+    private int stock;
 
     @Column(name = "precio_unitario", nullable = false, scale = 2)
-    private Double PrecioUnitario;
+    private Double precioUnitario;
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
-    private LocalDate FechaRegistro;
+    private LocalDate fechaRegistro;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(

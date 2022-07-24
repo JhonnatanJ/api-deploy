@@ -19,16 +19,16 @@ public class Cuenta {
     @Id
     @Column(name = "id_cuenta", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdCuenta;
+    private Long idCuenta;
 
     @Column(name = "email", nullable = false, unique = true, length = 40)
-    private String Email;
+    private String email;
 
     @Column(name = "contrasena", nullable = false, length = 30)
-    private String Contrasena;
+    private String contrasena;
 
     @Column(name = "fecha_creacion", nullable = false, updatable = false)
-    private LocalDate FechaCreacion;
+    private LocalDate fechaCreacion;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ci")

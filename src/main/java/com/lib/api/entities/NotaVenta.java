@@ -24,10 +24,10 @@ public class NotaVenta {
     private Long idNotaventa;
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
-    private LocalDate FechaRegistro;
+    private LocalDate fechaRegistro;
 
     @Column(name = "valor_total", nullable = false, scale = 2)
-    private Double ValorTotal;
+    private Double valorTotal;
 
     //--------------------------------------------------------------------------------------------------------
 

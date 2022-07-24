@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface NotaVentaRepository extends JpaRepository<NotaVenta,Long> {
 
     @Query(
-            value = "SELECT nv from NotaVenta nv WHERE  nv.FechaRegistro LIKE :fecha"
+            value = "SELECT nv from NotaVenta nv WHERE  nv.fechaRegistro LIKE :fecha"
     )
     List<NotaVenta> findByDate(@Param("fecha")LocalDate fecha);
 

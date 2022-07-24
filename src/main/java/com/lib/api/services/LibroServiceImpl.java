@@ -3,6 +3,8 @@ package com.lib.api.services;
 import com.lib.api.entities.*;
 import com.lib.api.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,6 +37,7 @@ public class LibroServiceImpl implements LibroService {
             throw new Exception(e.getMessage());
         }
     }
+
 
     @Override
     @Transactional
@@ -186,4 +189,53 @@ public class LibroServiceImpl implements LibroService {
         }
     }
 
+    @Override
+    @Transactional
+    public List<Libro> getAllByDateDESC() throws Exception {
+        try{
+            List<Libro> entities = libroRepository.getAllByDateDESC();
+            return entities;
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<Libro> getAllByDateASC() throws Exception {
+        try{
+            List<Libro> entities = libroRepository.getAllByDateASC();
+            return entities;
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
+
+    //--------------------------------------------------------------- MÉTODOS PAGINADOS
+
+    @Override
+    @Transactional
+    public Page<Libro> findAll(Pageable pageable) throws Exception{
+        try{
+            Page<Libro> entities = libroRepository.findAll(pageable);
+            return entities;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Page<Libro> findByGenero(String genero, Pageable pageable) throws Exception{
+        try{
+            Page<Libro> entities = libroRepository.findByGenero(genero, pageable);
+            return entities;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(path = "/geolib/generos")
 public class GeneroController {
 

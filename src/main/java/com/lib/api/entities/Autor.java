@@ -19,8 +19,8 @@ public class Autor implements Serializable {
     @Id
     @Column(name = "id_autor", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdAutor;
+    private Long idAutor;
 
     @Column(name = "nombre", nullable = false)
-    private String Nombre;
+    private String nombre;
 }

@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface AutorRepository extends JpaRepository<Autor, Long> {
 
     @Query(
-            value = "SELECT a from Autor a WHERE  a.Nombre LIKE :nombre"
+            value = "SELECT a from Autor a WHERE  a.nombre LIKE :nombre"
     )
     Optional<Autor> findByNombre(@Param("nombre") String nombre);
 }

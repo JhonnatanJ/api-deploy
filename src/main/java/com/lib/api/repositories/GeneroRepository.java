@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface GeneroRepository extends JpaRepository<Genero, Long> {
     @Query(
-            value = "SELECT g from Genero g WHERE  g.Nombre LIKE :nombre"
+            value = "SELECT g from Genero g WHERE  g.nombre LIKE :nombre"
     )
     Optional<Genero> findByNombre(@Param("nombre") String nombre);
 }
