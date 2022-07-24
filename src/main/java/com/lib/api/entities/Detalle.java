@@ -18,13 +18,13 @@ public class Detalle {
     @Id
     @Column(name = "id_detalle", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdDetalle;
+    private Long idDetalle;
 
     @Column(name = "cantidad", nullable = false)
-    private int Cantidad;
+    private int cantidad;
 
     @Column(name = "subtotal", nullable = false, scale = 2)
-    private Double Subtotal;
+    private Double subtotal;
 
     //-------------------------------------------------------------------------------------------------------------------
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

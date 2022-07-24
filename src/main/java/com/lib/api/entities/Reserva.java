@@ -20,22 +20,22 @@ public class Reserva {
     @Id
     @Column(name = "id_reserva", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IdReserva;
+    private Long idReserva;
 
     @Column(name = "fecha_creacion", updatable = false)
-    private LocalDate FechaCreacion;
+    private LocalDate fechaCreacion;
 
     @Column(name = "fecha_abono", nullable = false)
-    private LocalDate FechaAbono;
+    private LocalDate fechaAbono;
 
     @Column(name = "valor_total", nullable = false, scale = 2)
-    private Double ValorTotal;
+    private Double valorTotal;
 
     @Column(name = "abono", nullable = false, scale = 2)
-    private Double Abono;
+    private Double abono;
 
     @Column(name = "saldo", nullable = false, scale = 2)
-    private Double Saldo;
+    private Double saldo;
 
     //------------------------------------------------------------------------------------------------------------------------------
 

@@ -19,15 +19,15 @@ import javax.persistence.Table;
 public class Usuario {
     @Id
     @Column(name = "ci", nullable = false, unique = true, length = 10)
-    private String CI;
+    private String ci;
 
     @Column(name = "nombres", nullable = false, length = 60)
-    private String Nombres;
+    private String nombres;
 
     @Column(name = "apellidos", nullable = false, length = 60)
-    private String Apellidos;
+    private String apellidos;
 
     @Column(name = "telefono", length = 10)
-    private String Telefono;
+    private String telefono;
 
 }

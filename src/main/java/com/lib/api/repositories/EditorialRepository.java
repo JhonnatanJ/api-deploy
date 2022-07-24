@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface EditorialRepository extends JpaRepository<Editorial, Long> {
 
     @Query(
-            value = "SELECT e from Editorial e WHERE  e.Nombre LIKE :nombre"
+            value = "SELECT e from Editorial e WHERE  e.nombre LIKE :nombre"
     )
     Optional<Editorial> findByNombre(@Param("nombre") String nombre);
 

@@ -3,6 +3,7 @@ package com.lib.api.controllers;
 import com.lib.api.entities.Libro;
 import com.lib.api.services.LibroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ public class LibroController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
-
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Libro entity){
         try{
@@ -50,7 +50,7 @@ public class LibroController {
         }
     }
 
-//---------------------------- CONSULTAS NEGOCIO -----------------
+//------------------------------------------------------------------------------------------------- CONSULTAS NEGOCIO -----------------
 @GetMapping("/id/{id}")
 public ResponseEntity<?> getOne(@PathVariable String id) {
     try{
@@ -93,6 +93,45 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
     public ResponseEntity<?> getEditorial(@PathVariable String editorial) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByEditorial(editorial));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
+
+    @GetMapping("/novedades")
+    public ResponseEntity<?> getNovedades() {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.getAllByDateDESC());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
+    @GetMapping("/recomendados")
+    public ResponseEntity<?> getRecomendados() {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.getAllByDateASC());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
+
+
+
+    //--------------------------------------------------------------------- PAGED ----------------------------------------------------------
+
+    @GetMapping("/paged")
+    public ResponseEntity<?> getAll(Pageable pageable){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findAll(pageable));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
+
+    @GetMapping("/paged/genero/{genero}")
+    public ResponseEntity<?> getGenero(@PathVariable String genero, Pageable pageable) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByGenero(genero, pageable));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }

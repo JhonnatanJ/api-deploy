@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
     @Query(
-            value = "SELECT u from Usuario u WHERE  u.Nombres LIKE %:nombre% OR u.Apellidos LIKE %:nombre%"
+            value = "SELECT u from Usuario u WHERE  u.nombres LIKE %:nombre% OR u.apellidos LIKE %:nombre%"
     )
     Optional<Usuario> findByNombreApellido(@Param("nombre") String nombre);
 }
