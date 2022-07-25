@@ -66,15 +66,5 @@ public class CuentaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
-
-
-    @PostMapping("/login/{email}_{password}")
-    public ResponseEntity<?> login(@PathVariable String email, @PathVariable String password){
-        try{
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cuentaServiceImpl.login(email, password));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
-        }
-    }
 }
 

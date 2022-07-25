@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(path = "/geolib/libros")
 public class LibroController {
-
     @Autowired
     private LibroServiceImpl libroServiceImpl;
 
