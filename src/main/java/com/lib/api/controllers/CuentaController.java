@@ -9,7 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @Secured("ROLE_ADMINISTRADOR")
 @RequestMapping(path = "/geolib/cuentas")
 public class CuentaController {
