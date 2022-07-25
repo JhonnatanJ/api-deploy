@@ -1,12 +1,15 @@
 -- ------------------------------------------------------ ROLES,USUARIOS,CUENTAS
 
-INSERT INTO rol (nombre) VALUES	('administrador'),('vendedor');
+INSERT INTO rol (nombre) VALUES	('ROLE_ADMINISTRADOR'),('ROLE_VENDEDOR');
 
 INSERT INTO usuario (ci, apellidos, nombres, telefono) VALUES ('0602447682', 'Bonilla', 'jhonnatan', '0992016416');
+INSERT INTO usuario (ci, apellidos, nombres, telefono) VALUES ('1723117691', 'Barahona', 'Ivonne', '0996685513');
 
 INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a$10$2o3ARSVKOKch2nv4Kcvzk.RfjAFy3mODgQIZZXNJWhUlfahAQ8fbe', 'jhonnatanbm@gmail.com', '2022-07-07', '0602447682', 1);
+INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a$10$2o3ARSVKOKch2nv4Kcvzk.RfjAFy3mODgQIZZXNJWhUlfahAQ8fbe', 'ivonne@gmail.com', '2022-07-25', '1723117691', 1);
 
 INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (1, 1);
+INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (2, 2);
 
 -- -------------------------------------------------------------------------- LIBROS
 
