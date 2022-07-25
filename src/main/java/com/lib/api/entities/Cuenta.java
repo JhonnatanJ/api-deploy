@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "cuenta")
@@ -24,8 +25,10 @@ public class Cuenta {
     @Column(name = "email", nullable = false, unique = true, length = 40)
     private String email;
 
-    @Column(name = "contrasena", nullable = false, length = 30)
+    @Column(name = "contrasena", nullable = false, length = 70)
     private String contrasena;
+
+    private boolean enabled;
 
     @Column(name = "fecha_creacion", nullable = false, updatable = false)
     private LocalDate fechaCreacion;
@@ -34,11 +37,12 @@ public class Cuenta {
     @JoinColumn(name = "ci")
     private Usuario usuario;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "cuenta_rol",
             joinColumns = @JoinColumn(name = "id_cuenta", referencedColumnName = "id_cuenta"),
-            inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
+            inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "id_rol"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"id_cuenta","id_rol"})}
     )
-    private Rol rol;
+    private List<Rol> roles;
 }

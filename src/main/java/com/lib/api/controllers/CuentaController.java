@@ -5,10 +5,12 @@ import com.lib.api.services.CuentaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
+@Secured("ROLE_ADMINISTRADOR")
 @RequestMapping(path = "/geolib/cuentas")
 public class CuentaController {
 
@@ -23,6 +25,7 @@ public class CuentaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
+
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getOne(@PathVariable Long id) {
         try{
@@ -49,6 +52,7 @@ public class CuentaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Cuenta entity){
         try{
@@ -62,16 +66,6 @@ public class CuentaController {
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cuentaServiceImpl.delete(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
-        }
-    }
-
-
-    @PostMapping("/login/{email}_{password}")
-    public ResponseEntity<?> login(@PathVariable String email, @PathVariable String password){
-        try{
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cuentaServiceImpl.login(email, password));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
