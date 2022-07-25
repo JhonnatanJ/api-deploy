@@ -2,7 +2,6 @@ package com.lib.api.services;
 
 import com.lib.api.entities.Cuenta;
 import com.lib.api.repositories.CuentaRepository;
-import com.lib.api.repositories.RolRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

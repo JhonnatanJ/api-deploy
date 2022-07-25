@@ -12,4 +12,5 @@ public interface CuentaService {
     public Cuenta save(Cuenta entity) throws Exception;
     public Cuenta update(Long id, Cuenta entity) throws Exception;
     public boolean delete(Long id) throws Exception;
+
 }
