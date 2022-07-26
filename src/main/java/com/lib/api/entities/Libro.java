@@ -69,6 +69,9 @@ public class Libro implements Serializable {
     )
     private Cuenta cuenta;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Imagen imagen;
 
 //-------------------------------------- MÉTODOS ---------------------
     //MÉTODO AGREGAR AUTORES A LA ENTIDAD

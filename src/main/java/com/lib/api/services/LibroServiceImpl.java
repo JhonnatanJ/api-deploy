@@ -129,7 +129,6 @@ public class LibroServiceImpl implements LibroService {
     public boolean delete(String id) throws Exception {
         try{
             if(libroRepository.existsById(id)){
-                //libroRepository.quitarRelacionAutor(id);
                 libroRepository.deleteById(id);
                 return true;
             }else{
