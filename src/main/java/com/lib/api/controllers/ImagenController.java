@@ -1,7 +1,6 @@
 package com.lib.api.controllers;
 
 import com.lib.api.entities.Imagen;
-import com.lib.api.services.CloudinaryService;
 import com.lib.api.services.ImagenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/geolib/imagenes")

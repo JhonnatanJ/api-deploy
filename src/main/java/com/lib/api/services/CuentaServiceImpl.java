@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class CuentaServiceImpl implements CuentaService, UserDetailsService {
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private Logger logger = LoggerFactory.getLogger(CuentaServiceImpl.class);
     @Autowired
     private CuentaRepository cuentaRepository;
@@ -84,9 +86,7 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
     @Transactional
     public Cuenta save(Cuenta entity) throws Exception {
         try{
-            entity.setFechaCreacion(LocalDate.now());
-            entity = cuentaRepository.save(entity);
-            return entity;
+            return cuentaRepository.save(entity);
         }
         catch (Exception e){
             throw new Exception(e.getMessage());

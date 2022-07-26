@@ -102,6 +102,7 @@ public class LibroServiceImpl implements LibroService {
             entity.AddAutores(autoresVerif);
             entity.AddGeneros(generosVerif);
             entity = libroRepository.save(entity);
+
             return entity;
         } catch (Exception e){
             throw new Exception(e.getMessage());

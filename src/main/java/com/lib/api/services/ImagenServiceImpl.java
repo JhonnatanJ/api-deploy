@@ -5,8 +5,6 @@ import com.cloudinary.utils.ObjectUtils;
 import com.lib.api.entities.Imagen;
 import com.lib.api.repositories.ImagenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,9 +19,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class ImagenServiceImpl {
+public class ImagenServiceImpl implements ImagenService {
 
+    @Autowired
+    ImagenRepository imagenRepository;
     Cloudinary cloudinary;
+
     private Map<String, String> valuesMap = new HashMap<>();
     public ImagenServiceImpl(){
         valuesMap.put("cloud_name", "drt1ea5my");
@@ -31,9 +32,6 @@ public class ImagenServiceImpl {
         valuesMap.put("api_secret", "MX2eqiEhxtJYpJLSW5ZAZVGVUAk");
         cloudinary = new Cloudinary(valuesMap);
     }
-
-    @Autowired
-    ImagenRepository imagenRepository;
 
     public List<Imagen> list() {
         return imagenRepository.findByOrderById();
