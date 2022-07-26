@@ -3,7 +3,6 @@ package com.lib.api.services;
 import com.lib.api.entities.Cuenta;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CuentaService {
     public List<Cuenta> findAll() throws Exception;

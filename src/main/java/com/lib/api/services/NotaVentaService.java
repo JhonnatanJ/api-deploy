@@ -2,7 +2,6 @@ package com.lib.api.services;
 
 import com.lib.api.entities.NotaVenta;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface NotaVentaService {

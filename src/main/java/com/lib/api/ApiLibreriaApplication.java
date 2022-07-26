@@ -22,11 +22,11 @@ public class ApiLibreriaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		String password = "12345";
-//
-//		for(int i=0; i<4; i++){
-//			String passwordBcrypt = passwordEncode.encode(password);
-//			System.out.println(passwordBcrypt);
-//		}
+//		String password = "vendedorI";
+//		String passwordBcrypt = passwordEncode.encode(password);
+//		System.out.println(passwordBcrypt);
+//		String password2 = "adminJ";
+//		String passwordBcrypt2 = passwordEncode.encode(password2);
+//		System.out.println(passwordBcrypt2);
 	}
 }

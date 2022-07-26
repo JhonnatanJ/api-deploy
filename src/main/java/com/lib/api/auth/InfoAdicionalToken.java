@@ -1,7 +1,6 @@
 package com.lib.api.auth;
 
 import com.lib.api.entities.Cuenta;
-import com.lib.api.repositories.CuentaRepository;
 import com.lib.api.services.CuentaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
