@@ -49,21 +49,26 @@ public class ImagenServiceImpl implements ImagenService {
 
     public Imagen save(MultipartFile multipartFile, String isbn) throws IOException {
         try {
-            File file = convert(multipartFile);
-            Map result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
-            file.delete();
+            if(!imagenRepository.findByNombre(isbn).isPresent()) {
+                File file = convert(multipartFile);
+                Map result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+                file.delete();
 
-            BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-            if (bi == null) {
-                System.out.println("ERROR EN TIPO DE ARCHIVO");
+                BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+                if (bi == null) {
+                    System.out.println("ERROR EN TIPO DE ARCHIVO");
+                    throw new IOException();
+                }
+                Imagen imagen = new Imagen((Long) result.get("id"),
+                        isbn,
+                        (String) result.get("url"),
+                        (String) result.get("public_id"));
+                imagenRepository.save(imagen);
+                return imagen;
+            }
+            else{
                 throw new IOException();
             }
-            Imagen imagen = new Imagen((Long) result.get("id"),
-                     isbn,
-                    (String) result.get("url"),
-                    (String) result.get("public_id"));
-            imagenRepository.save(imagen);
-            return imagen;
         }
         catch (IOException e){
             throw  new IOException(e.getMessage());
