@@ -37,7 +37,7 @@ public class Cuenta {
     @JoinColumn(name = "ci")
     private Usuario usuario;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "cuenta_rol",
             joinColumns = @JoinColumn(name = "id_cuenta", referencedColumnName = "id_cuenta"),

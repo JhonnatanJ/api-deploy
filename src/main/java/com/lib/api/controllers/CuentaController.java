@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 //@CrossOrigin(origins = "*")
-@Secured("ROLE_ADMINISTRADOR")
+//@Secured("ROLE_ADMINISTRADOR")
 @RequestMapping(path = "/geolib/cuentas")
 public class CuentaController {
 
@@ -49,7 +49,7 @@ public class CuentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(cuentaServiceImpl.save(entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ERROR BODY"+e.getMessage());
         }
     }
 
