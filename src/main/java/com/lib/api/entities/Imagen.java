@@ -19,7 +19,7 @@ public class Imagen {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nombre", nullable = false, length = 60)
+    @Column(name = "nombre", unique = true, nullable = false, length = 60)
     private String nombre;
 
     @Column(name = "imagenUrl", nullable = false, length = 150)

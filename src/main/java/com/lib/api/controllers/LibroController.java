@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -28,7 +29,7 @@ public class LibroController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.save(entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @PutMapping("/{id}")
@@ -45,7 +46,7 @@ public class LibroController {
         try{
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(libroServiceImpl.delete(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 

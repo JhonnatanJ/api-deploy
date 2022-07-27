@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -24,6 +25,8 @@ public class LibroServiceImpl implements LibroService {
     @Autowired
     private EditorialRepository editorialRepository;
 
+    @Autowired
+    private ImagenServiceImpl imagenServiceImpl;
     @Autowired
     private CuentaRepository cuentaRepository;
 
@@ -96,12 +99,21 @@ public class LibroServiceImpl implements LibroService {
             else{
                 throw new Exception();
             }
+            if(imagenServiceImpl.findByNombre(entity.getISBN()).isPresent()) {
+                Imagen imagen = imagenServiceImpl.findByNombre(entity.getISBN()).get();
+                entity.setImagen(imagen);
+            }
+            else{
+                System.out.println("ERROR BUSCANDO IMAGEN \n");
+                throw new Exception();
+            }
 
             entity.setFechaRegistro(LocalDate.now());
             entity.AddEditoriales(editorialesVerif);
             entity.AddAutores(autoresVerif);
             entity.AddGeneros(generosVerif);
             entity = libroRepository.save(entity);
+
             return entity;
         } catch (Exception e){
             throw new Exception(e.getMessage());
@@ -129,7 +141,7 @@ public class LibroServiceImpl implements LibroService {
     public boolean delete(String id) throws Exception {
         try{
             if(libroRepository.existsById(id)){
-                //libroRepository.quitarRelacionAutor(id);
+                imagenServiceImpl.delete(libroRepository.findById(id).get().getImagen().getId());
                 libroRepository.deleteById(id);
                 return true;
             }else{
