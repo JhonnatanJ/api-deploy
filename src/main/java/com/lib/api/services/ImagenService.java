@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface ImagenService {
-
     public List<Imagen> list();
     public Optional<Imagen> getOne(Long id);
-    public Map save(MultipartFile multipartFile) throws IOException;
+    public Optional<Imagen> findByNombre(String isbn);
+    public Imagen save(MultipartFile multipartFile, String isbn) throws IOException;
     public boolean delete(Long id) throws IOException;
     public boolean exists(Long id);
 }

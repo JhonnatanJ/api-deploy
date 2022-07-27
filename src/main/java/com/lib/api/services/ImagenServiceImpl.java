@@ -3,6 +3,7 @@ package com.lib.api.services;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.lib.api.entities.Imagen;
+import com.lib.api.entities.Libro;
 import com.lib.api.repositories.ImagenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,12 @@ public class ImagenServiceImpl implements ImagenService {
         return imagenRepository.findById(id);
     }
 
-    public Map save(MultipartFile multipartFile) throws IOException {
+
+    public Optional<Imagen> findByNombre(String isbn) {
+        return imagenRepository.findByNombre(isbn);
+    }
+
+    public Imagen save(MultipartFile multipartFile, String isbn) throws IOException {
         try {
             File file = convert(multipartFile);
             Map result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
@@ -49,16 +55,49 @@ public class ImagenServiceImpl implements ImagenService {
 
             BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
             if (bi == null) {
+                System.out.println("ERROR EN TIPO DE ARCHIVO");
                 throw new IOException();
             }
-            Imagen imagen = new Imagen((Long) result.get("id"), (String) result.get("original_filename"),
+            Imagen imagen = new Imagen((Long) result.get("id"),
+                     isbn,
                     (String) result.get("url"),
                     (String) result.get("public_id"));
             imagenRepository.save(imagen);
-            return result;
+            return imagen;
         }
         catch (IOException e){
             throw  new IOException(e.getMessage());
+        }
+    }
+
+    public Imagen update(MultipartFile multipartFile, String isbn) throws Exception {
+        try {
+            if (imagenRepository.findByNombre(isbn).isPresent()) {
+                Imagen imagen = imagenRepository.findByNombre(isbn).get();
+                cloudinary.uploader().destroy(imagen.getImagenId(), ObjectUtils.emptyMap());
+                File file = convert(multipartFile);
+                Map result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+                file.delete();
+
+                BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+                if (bi == null) {
+                    System.out.println("ERROR EN TIPO DE ARCHIVO");
+                    throw new IOException();
+                }
+                Imagen auxImagen = new Imagen((Long) result.get("id"),
+                        isbn,
+                        (String) result.get("url"),
+                        (String) result.get("public_id"));
+                imagen.setImagenId(auxImagen.getImagenId());
+                imagen.setImagenUrl(auxImagen.getImagenUrl());
+                imagenRepository.save(imagen);
+                return  imagen;
+            }
+            else {
+                throw new Exception();
+            }
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
         }
     }
 

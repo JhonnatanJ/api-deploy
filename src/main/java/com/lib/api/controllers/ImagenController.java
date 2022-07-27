@@ -23,10 +23,19 @@ public class ImagenController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile) throws IOException {
+    @PostMapping("/{isbn}")
+    public ResponseEntity<?> upload(@RequestParam MultipartFile multipartFile, @PathVariable String isbn) throws IOException {
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(imagenServiceImpl.save(multipartFile));
+            return ResponseEntity.status(HttpStatus.OK).body(imagenServiceImpl.save(multipartFile, isbn));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{isbn}")
+    public ResponseEntity<?> update(@RequestParam MultipartFile multipartFile, @PathVariable String isbn) throws IOException {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(imagenServiceImpl.update(multipartFile, isbn));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

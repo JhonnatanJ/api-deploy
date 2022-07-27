@@ -3,6 +3,7 @@ package com.lib.api.services;
 import com.lib.api.entities.Libro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
