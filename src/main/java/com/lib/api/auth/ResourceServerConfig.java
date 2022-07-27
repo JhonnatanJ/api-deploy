@@ -23,6 +23,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/geolib/libros/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/geolib/libros/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/geolib/imagenes/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/geolib/imagenes/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/geolib/imagenes/**").permitAll()
 //                .antMatchers("/geolib/cuentas/**").hasAnyRole("ADMINISTRADOR")
                 .anyRequest().authenticated()
                 .and().cors().configurationSource(corsConfigurationSource());

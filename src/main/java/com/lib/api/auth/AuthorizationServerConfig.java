@@ -23,7 +23,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
     @Autowired
     @Qualifier("authenticationManager")
     private AuthenticationManager authenticationManager;
@@ -43,8 +42,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret(passwordEncoder.encode("12345"))
                 .scopes("read", "write")
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600)
-                .refreshTokenValiditySeconds(3600);
+                .accessTokenValiditySeconds(43200)
+                .refreshTokenValiditySeconds(43200);
     }
 
     @Override
