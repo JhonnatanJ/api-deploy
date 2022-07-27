@@ -1,7 +1,9 @@
 package com.lib.api.services;
 
 import com.lib.api.entities.Cuenta;
+import com.lib.api.entities.Rol;
 import com.lib.api.repositories.CuentaRepository;
+import com.lib.api.repositories.RolRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,10 +26,14 @@ import java.util.stream.Collectors;
 @Service
 public class CuentaServiceImpl implements CuentaService, UserDetailsService {
 
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private Logger logger = LoggerFactory.getLogger(CuentaServiceImpl.class);
     @Autowired
     private CuentaRepository cuentaRepository;
+
+    @Autowired
+    private RolRepository rolRepository;
     @Override
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -45,7 +52,6 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
 
         return new User(cuenta.getEmail(), cuenta.getContrasena(), cuenta.isEnabled(), true, true, true, authorities);
     }
-
     @Override
     @Transactional
     public List<Cuenta> findAll() throws Exception {
@@ -56,7 +62,6 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
             throw new Exception(e.getMessage());
         }
     }
-
     @Override
     @Transactional
     public Cuenta findById(Long id) throws Exception {
@@ -69,7 +74,6 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
         }
 
     }
-
     @Override
     @Transactional
     public Cuenta findByEmail(String email) throws Exception {
@@ -81,11 +85,17 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
         }
 
     }
-
     @Override
     @Transactional
     public Cuenta save(Cuenta entity) throws Exception {
         try{
+            entity.setFechaCreacion(LocalDate.now());
+            entity.setContrasena(bCryptPasswordEncoder.encode(entity.getContrasena()));
+            List<Rol> roles = new ArrayList<>();
+            for(Rol rol: entity.getRoles()){
+                roles.add(rolRepository.findByNombre(rol.getNombre()).get());
+            }
+            entity.setRoles(roles);
             return cuentaRepository.save(entity);
         }
         catch (Exception e){
@@ -98,7 +108,7 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
     public Cuenta update(Long id, Cuenta entity) throws Exception {
         try {
             if (cuentaRepository.existsById(id)) {
-                cuentaRepository.save(entity);
+                save(entity);
                 return entity;
             } else {
                 return null;
