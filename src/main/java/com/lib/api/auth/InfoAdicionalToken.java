@@ -27,8 +27,8 @@ public class InfoAdicionalToken implements TokenEnhancer {
             throw new RuntimeException(e);
         }
         Map<String, Object> info = new HashMap<>();
-        info.put("id_cuenta:", cuenta.getIdCuenta());
-        info.put("email:", cuenta.getEmail());
+        info.put("id_cuenta", cuenta.getIdCuenta());
+        info.put("email", cuenta.getEmail());
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
         return accessToken;
     }
