@@ -96,4 +96,8 @@ public class Libro implements Serializable {
             editoriales.add(editorial);
         }
     }
+
+    public void RemoveStock(int stock){
+        this.stock = this.stock - stock;
+    }
 }
