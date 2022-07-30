@@ -37,7 +37,7 @@ public class UsuarioController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(usuarioServiceImpl.findByNombreApellido(nombre));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 

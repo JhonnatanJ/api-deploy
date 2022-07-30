@@ -1,4 +1,4 @@
-package com.lib.api.controllers.services;
+package com.lib.api.services;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
