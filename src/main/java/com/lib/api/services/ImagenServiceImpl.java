@@ -3,7 +3,6 @@ package com.lib.api.services;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.lib.api.entities.Imagen;
-import com.lib.api.entities.Libro;
 import com.lib.api.repositories.ImagenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

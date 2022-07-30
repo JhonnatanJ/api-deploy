@@ -1,6 +1,7 @@
 package com.lib.api.services;
 
 import com.lib.api.entities.Detalle;
+import com.lib.api.entities.Libro;
 import com.lib.api.entities.NotaVenta;
 import com.lib.api.repositories.CuentaRepository;
 import com.lib.api.repositories.LibroRepository;
@@ -22,8 +23,8 @@ public class NotaVentaServiceImpl implements NotaVentaService {
     private CuentaRepository cuentaRepository;
     @Autowired
     private LibroRepository libroRepository;
-
-
+    @Autowired
+    private LibroService libroService;
     @Override
     @Transactional
     public List<NotaVenta> findAll() throws Exception {
@@ -67,7 +68,10 @@ public class NotaVentaServiceImpl implements NotaVentaService {
             entity.setCuenta(cuentaRepository.findById(entity.getCuenta().getIdCuenta()).get());
             double valor_total = 0;
             for (Detalle detalle: entity.getDetalles() ) {
-                detalle.setLibro(libroRepository.findById(detalle.getLibro().getISBN()).get());
+                Libro libro = libroRepository.findById(detalle.getLibro().getISBN()).get();
+                libro.RemoveStock(detalle.getCantidad());
+                libroRepository.save(libro);
+                detalle.setLibro(libro);
                 detalle.setSubtotal(Math.round((detalle.getLibro().getPrecioUnitario() * detalle.getCantidad())*100.0)/100.0);
                 valor_total += detalle.getSubtotal();
             }

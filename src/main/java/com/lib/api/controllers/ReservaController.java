@@ -57,4 +57,34 @@ public class ReservaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
+
+
+    //---------------------------------------------------------- CONSULTAS
+
+    @GetMapping("/fecha/{fecha}")
+    public ResponseEntity<?> getByDate(@PathVariable String fecha){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findByDate(fecha));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/abonos/{fecha}")
+    public ResponseEntity<?> getByDateAbono(@PathVariable String fecha){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findByDateAbono(fecha));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
+    @GetMapping("/liquidado/{fecha}")
+    public ResponseEntity<?> getByDateCompleto(@PathVariable String fecha){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findByDateCompleto(fecha));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        }
+    }
+
 }

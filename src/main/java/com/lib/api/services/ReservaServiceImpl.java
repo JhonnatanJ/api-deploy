@@ -1,6 +1,7 @@
 package com.lib.api.services;
 
 import com.lib.api.entities.DetalleReserva;
+import com.lib.api.entities.Libro;
 import com.lib.api.entities.Reserva;
 import com.lib.api.repositories.CuentaRepository;
 import com.lib.api.repositories.LibroRepository;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -54,9 +54,8 @@ public class ReservaServiceImpl implements ReservaService {
     @Transactional
     public Reserva save(Reserva entity) throws Exception {
         try {
-            DecimalFormat df = new DecimalFormat("###.##");
-
             entity.setFechaCreacion(LocalDate.now());
+            entity.setFechaAbono(LocalDate.now());
             entity.setCuenta(cuentaRepository.findById(entity.getCuenta().getIdCuenta()).get());
 
             if(usuarioRepository.findById(entity.getUsuario().getCi()).isPresent()){
@@ -65,7 +64,10 @@ public class ReservaServiceImpl implements ReservaService {
 
             double valor_total = 0;
             for(DetalleReserva detalleReserva: entity.getDetalleReservas()){
-                detalleReserva.setLibro(libroRepository.findById(detalleReserva.getLibro().getISBN()).get());
+                Libro libro = libroRepository.findById(detalleReserva.getLibro().getISBN()).get();
+                libro.RemoveStock(detalleReserva.getCantidad());
+                libroRepository.save(libro);
+                detalleReserva.setLibro(libro);
                 detalleReserva.setSubtotal(Math.round((detalleReserva.getLibro().getPrecioUnitario() * detalleReserva.getCantidad())*100.0)/100.0);
                 valor_total += detalleReserva.getSubtotal();
             }
@@ -87,11 +89,14 @@ public class ReservaServiceImpl implements ReservaService {
     @Transactional
     public Reserva update(Long id, Reserva entity) throws Exception {
         try {
-            if (reservaRepository.existsById(id)) {
-                save(entity);
+            if (reservaRepository.existsById(id) && (entity.getAbono() <= entity.getValorTotal() && entity.getAbono() > 0)) {
+                double saldo = Math.round((entity.getValorTotal() - entity.getAbono())*100.0)/100.0;
+                entity.setSaldo(saldo);
+                entity.setFechaAbono(LocalDate.now());
+                reservaRepository.save(entity);
                 return entity;
             } else {
-                return null;
+                throw new Exception();
             }
         }
         catch (Exception e){
@@ -113,4 +118,35 @@ public class ReservaServiceImpl implements ReservaService {
             throw new Exception(e.getMessage());
         }
     }
+    @Override
+    public List<Reserva> findByDate(String fecha) throws Exception {
+        try{
+            LocalDate localDate = LocalDate.parse(fecha);
+            return reservaRepository.findByDate(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
+    public List<Reserva> findByDateAbono(String fecha) throws Exception{
+        try{
+            LocalDate localDate = LocalDate.parse(fecha);
+            return reservaRepository.findByDateAbono(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
+    public List<Reserva> findByDateCompleto(String fecha) throws Exception{
+        try{
+            LocalDate localDate = LocalDate.parse(fecha);
+            return reservaRepository.findByDateCompleto(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }

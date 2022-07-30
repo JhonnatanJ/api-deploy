@@ -1,15 +1,10 @@
 package com.lib.api;
 
-import com.lib.api.entities.Rol;
-import com.lib.api.repositories.RolRepository;
-import com.lib.api.services.RolServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.persistence.EntityManager;
 
 @SpringBootApplication
 public class ApiLibreriaApplication implements CommandLineRunner {
