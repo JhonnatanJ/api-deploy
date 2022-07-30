@@ -1,4 +1,4 @@
-package com.lib.api.services;
+package com.lib.api.controllers.services;
 
 import com.lib.api.entities.Imagen;
 import org.springframework.web.multipart.MultipartFile;

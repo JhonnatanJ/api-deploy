@@ -1,4 +1,4 @@
-package com.lib.api.services;
+package com.lib.api.controllers.services;
 
 import com.lib.api.entities.DetalleReserva;
 import com.lib.api.entities.Libro;
@@ -89,7 +89,7 @@ public class ReservaServiceImpl implements ReservaService {
     @Transactional
     public Reserva update(Long id, Reserva entity) throws Exception {
         try {
-            if (reservaRepository.existsById(id) && (entity.getAbono() <= entity.getValorTotal())) {
+            if (reservaRepository.existsById(id) && (entity.getAbono() <= entity.getValorTotal() && entity.getAbono() > 0)) {
                 double saldo = Math.round((entity.getValorTotal() - entity.getAbono())*100.0)/100.0;
                 entity.setSaldo(saldo);
                 entity.setFechaAbono(LocalDate.now());
@@ -115,6 +115,36 @@ public class ReservaServiceImpl implements ReservaService {
                 throw new Exception();
             }
         } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
+    public List<Reserva> findByDate(String fecha) throws Exception {
+        try{
+            LocalDate localDate = LocalDate.parse(fecha);
+            return reservaRepository.findByDate(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
+    public List<Reserva> findByDateAbono(String fecha) throws Exception{
+        try{
+            LocalDate localDate = LocalDate.parse(fecha);
+            return reservaRepository.findByDateAbono(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+    @Override
+    public List<Reserva> findByDateCompleto(String fecha) throws Exception{
+        try{
+            LocalDate localDate = LocalDate.parse(fecha);
+            return reservaRepository.findByDateCompleto(localDate);
+        }
+        catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }

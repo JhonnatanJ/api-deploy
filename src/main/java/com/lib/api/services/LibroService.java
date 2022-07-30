@@ -1,4 +1,4 @@
-package com.lib.api.services;
+package com.lib.api.controllers.services;
 
 import com.lib.api.entities.Libro;
 import org.springframework.data.domain.Page;

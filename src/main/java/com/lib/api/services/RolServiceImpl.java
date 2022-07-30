@@ -1,4 +1,4 @@
-package com.lib.api.services;
+package com.lib.api.controllers.services;
 
 import com.lib.api.entities.Rol;
 import com.lib.api.repositories.RolRepository;
