@@ -9,7 +9,7 @@ public interface UsuarioService {
 
     public List<Usuario> findAll() throws Exception;
     public Usuario findById(String id) throws Exception;
-    public Optional<Usuario> findByNombreApellido(String email) throws Exception;
+    public List<Usuario> findByNombreApellido(String email) throws Exception;
     public Usuario save(Usuario entity) throws Exception;
     public Usuario update(String id, Usuario entity) throws Exception;
 

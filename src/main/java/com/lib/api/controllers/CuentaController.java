@@ -5,11 +5,12 @@ import com.lib.api.services.CuentaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 //@CrossOrigin(origins = "*")
-//@Secured("ROLE_ADMINISTRADOR")
+@Secured("ROLE_ADMINISTRADOR")
 @RequestMapping(path = "/geolib/cuentas")
 public class CuentaController {
 

@@ -124,7 +124,9 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
     public boolean delete(Long id) throws Exception {
         try{
             if(cuentaRepository.existsById(id)){
-                cuentaRepository.deleteById(id);
+                Cuenta entity = findById(id);
+                entity.setEnabled(false);
+                cuentaRepository.save(entity);
                 return true;
             }else{
                 throw new Exception();

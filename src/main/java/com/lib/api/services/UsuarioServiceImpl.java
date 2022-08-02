@@ -41,10 +41,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
-    public Optional<Usuario> findByNombreApellido(String nombre) throws Exception {
+    public List<Usuario> findByNombreApellido(String nombre) throws Exception {
         try{
-            Optional<Usuario> optionalEntitie = usuarioRepository.findByNombreApellido(nombre);
-            return optionalEntitie;
+            List<Usuario> entities = usuarioRepository.findByNombreApellido(nombre);
+            return entities;
         }
         catch (Exception e){
             throw new Exception(e.getMessage());

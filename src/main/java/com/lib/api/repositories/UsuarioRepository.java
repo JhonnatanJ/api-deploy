@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
@@ -14,5 +14,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     @Query(
             value = "SELECT u from Usuario u WHERE  u.nombres LIKE %:nombre% OR u.apellidos LIKE %:nombre%"
     )
-    Optional<Usuario> findByNombreApellido(@Param("nombre") String nombre);
+    List<Usuario> findByNombreApellido(@Param("nombre") String nombre);
 }
