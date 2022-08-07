@@ -89,13 +89,23 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
     @Transactional
     public Cuenta save(Cuenta entity) throws Exception {
         try{
-            entity.setFechaCreacion(LocalDate.now());
-            entity.setContrasena(bCryptPasswordEncoder.encode(entity.getContrasena()));
-            List<Rol> roles = new ArrayList<>();
-            for(Rol rol: entity.getRoles()){
-                roles.add(rolRepository.findByNombre(rol.getNombre()).get());
+            if(entity.getIdCuenta() == null) {
+                entity.setFechaCreacion(LocalDate.now());
+                entity.setContrasena(bCryptPasswordEncoder.encode(entity.getContrasena()));
+                List<Rol> roles = new ArrayList<>();
+                for (Rol rol : entity.getRoles()) {
+                    roles.add(rolRepository.findByNombre(rol.getNombre()).get());
+                }
+                entity.setRoles(roles);
             }
-            entity.setRoles(roles);
+            else{
+                if(cuentaRepository.findById(entity.getIdCuenta()).isPresent()) {
+                    Cuenta auxCuenta = cuentaRepository.findById(entity.getIdCuenta()).get();
+                    if(!auxCuenta.getContrasena().equals(entity.getContrasena())){
+                        entity.setContrasena(bCryptPasswordEncoder.encode(entity.getContrasena()));
+                    }
+                }
+            }
             return cuentaRepository.save(entity);
         }
         catch (Exception e){
