@@ -25,6 +25,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/geolib/libros/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/geolib/imagenes/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/geolib/imagenes/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/geolib/imagenes/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/geolib/generos/**").permitAll()
 //                .antMatchers("/geolib/cuentas/**").hasAnyRole("ADMINISTRADOR")
                 .anyRequest().authenticated()
