@@ -89,11 +89,15 @@ public class ReservaServiceImpl implements ReservaService {
     @Transactional
     public Reserva update(Long id, Reserva entity) throws Exception {
         try {
+            System.out.println("antes de buscar reserva" + entity.getIdReserva());
             if (reservaRepository.existsById(id) && (entity.getAbono() <= entity.getValorTotal() && entity.getAbono() > 0)) {
+                System.out.println("dentro de if" + entity.getIdReserva());
                 double saldo = Math.round((entity.getValorTotal() - entity.getAbono())*100.0)/100.0;
                 entity.setSaldo(saldo);
                 entity.setFechaAbono(LocalDate.now());
-                reservaRepository.save(entity);
+                System.out.println("antes de guardar");
+                entity = reservaRepository.save(entity);
+                System.out.println("después de guardar");
                 return entity;
             } else {
                 throw new Exception();

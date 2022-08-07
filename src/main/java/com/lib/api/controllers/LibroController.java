@@ -20,7 +20,7 @@ public class LibroController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findAll());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @PostMapping("")
@@ -36,7 +36,7 @@ public class LibroController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.update(id, entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
     try{
         return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findById(id));
     } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 }
 
@@ -64,7 +64,7 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByNombre(nombre));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByAutor(autor));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -84,7 +84,7 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByGenero(genero));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByEditorial(editorial));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -102,7 +102,7 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.getAllByDateDESC());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/recomendados")
@@ -110,7 +110,7 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.getAllByDateASC());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 

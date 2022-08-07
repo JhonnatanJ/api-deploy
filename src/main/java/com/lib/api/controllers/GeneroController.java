@@ -19,7 +19,7 @@ public class GeneroController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(generoServiceImpl.findAll());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/id/{id}")
@@ -27,7 +27,7 @@ public class GeneroController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(generoServiceImpl.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class GeneroController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(generoServiceImpl.findByNombre(nombre));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

@@ -20,7 +20,7 @@ public class AutorController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(autorServiceImpl.findAll());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/id/{id}")
@@ -28,7 +28,7 @@ public class AutorController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(autorServiceImpl.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -37,7 +37,7 @@ public class AutorController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(autorServiceImpl.findByNombre(nombre));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ public class AutorController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(autorServiceImpl.save(entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @PutMapping("/{id}")
@@ -54,7 +54,7 @@ public class AutorController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(autorServiceImpl.update(id, entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class AutorController {
         try{
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(autorServiceImpl.delete(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 

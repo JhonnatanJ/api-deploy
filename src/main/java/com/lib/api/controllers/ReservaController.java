@@ -20,7 +20,7 @@ public class ReservaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findAll());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/id/{id}")
@@ -28,7 +28,7 @@ public class ReservaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -37,7 +37,7 @@ public class ReservaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.save(entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @PutMapping("/{id}")
@@ -45,7 +45,7 @@ public class ReservaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.update(id, entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class ReservaController {
         try{
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(reservaServiceImpl.delete(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ public class ReservaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findByDateAbono(fecha));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/liquidado/{fecha}")
@@ -83,7 +83,7 @@ public class ReservaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findByDateCompleto(fecha));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 

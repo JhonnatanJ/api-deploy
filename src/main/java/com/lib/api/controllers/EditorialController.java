@@ -19,7 +19,7 @@ public class EditorialController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(editorialServiceImpl.findAll());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/id/{id}")
@@ -27,7 +27,7 @@ public class EditorialController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(editorialServiceImpl.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class EditorialController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(editorialServiceImpl.findByNombre(nombre));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

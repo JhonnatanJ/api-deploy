@@ -22,7 +22,7 @@ public class CuentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(cuentaServiceImpl.findAll());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public class CuentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(cuentaServiceImpl.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class CuentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(cuentaServiceImpl.findByEmail(email));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -49,7 +49,7 @@ public class CuentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(cuentaServiceImpl.save(entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ERROR BODY"+e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class CuentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(cuentaServiceImpl.update(id, entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class CuentaController {
         try{
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cuentaServiceImpl.delete(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }

@@ -19,7 +19,7 @@ public class NotaVentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(notaVentaServiceImpl.findAll());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
     @GetMapping("/id/{id}")
@@ -27,7 +27,7 @@ public class NotaVentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(notaVentaServiceImpl.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -36,7 +36,7 @@ public class NotaVentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(notaVentaServiceImpl.findByDate(fecha));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -45,7 +45,7 @@ public class NotaVentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(notaVentaServiceImpl.save(entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @PutMapping("/{id}")
@@ -53,7 +53,7 @@ public class NotaVentaController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(notaVentaServiceImpl.update(id, entity));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class NotaVentaController {
         try{
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(notaVentaServiceImpl.delete(id));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }
