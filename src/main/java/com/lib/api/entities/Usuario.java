@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Usuario {
     @Id
-    @Column(name = "ci", nullable = false, unique = true, length = 10)
+    @Column(name = "ci", nullable = false, unique = true, length = 10, updatable = false)
     private String ci;
 
     @Column(name = "nombres", nullable = false, length = 60)

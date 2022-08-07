@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 //@CrossOrigin(origins = "*")
-@Secured("ROLE_ADMINISTRADOR")
 @RequestMapping(path = "/geolib/cuentas")
 public class CuentaController {
 
     @Autowired
     private CuentaServiceImpl cuentaServiceImpl;
-
+    @Secured("ROLE_ADMINISTRADOR")
     @GetMapping("")
     public ResponseEntity<?> getAll(){
         try{
@@ -34,7 +33,7 @@ public class CuentaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
+    @Secured("ROLE_ADMINISTRADOR")
     @GetMapping("/email/{email}")
     public ResponseEntity<?> getAll(@PathVariable String email) {
         try{
@@ -43,7 +42,7 @@ public class CuentaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
+    @Secured("ROLE_ADMINISTRADOR")
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Cuenta entity){
         try{
@@ -62,6 +61,7 @@ public class CuentaController {
         }
     }
 
+    @Secured("ROLE_ADMINISTRADOR")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{

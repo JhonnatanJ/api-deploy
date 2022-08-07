@@ -104,6 +104,11 @@ public class CuentaServiceImpl implements CuentaService, UserDetailsService {
                     if(!auxCuenta.getContrasena().equals(entity.getContrasena())){
                         entity.setContrasena(bCryptPasswordEncoder.encode(entity.getContrasena()));
                     }
+                    List<Rol> roles = new ArrayList<>();
+                    for (Rol rol : entity.getRoles()) {
+                        roles.add(rolRepository.findByNombre(rol.getNombre()).get());
+                    }
+                    entity.setRoles(roles);
                 }
             }
             return cuentaRepository.save(entity);
