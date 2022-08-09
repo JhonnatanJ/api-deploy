@@ -62,19 +62,21 @@ public class ReservaServiceImpl implements ReservaService {
                 entity.setUsuario(usuarioRepository.findById(entity.getUsuario().getCi()).get());
             }
 
-            double valor_total = 0;
-            for(DetalleReserva detalleReserva: entity.getDetalleReservas()){
-                Libro libro = libroRepository.findById(detalleReserva.getLibro().getISBN()).get();
-                libro.RemoveStock(detalleReserva.getCantidad());
-                libroRepository.save(libro);
-                detalleReserva.setLibro(libro);
-                detalleReserva.setSubtotal(Math.round((detalleReserva.getLibro().getPrecioUnitario() * detalleReserva.getCantidad())*100.0)/100.0);
-                valor_total += detalleReserva.getSubtotal();
+            if(entity.getIdReserva()==null){
+                double valor_total = 0;
+                for(DetalleReserva detalleReserva: entity.getDetalleReservas()){
+                    Libro libro = libroRepository.findById(detalleReserva.getLibro().getISBN()).get();
+                    libro.RemoveStock(detalleReserva.getCantidad());
+                    libroRepository.save(libro);
+                    detalleReserva.setLibro(libro);
+                    detalleReserva.setSubtotal(Math.round((detalleReserva.getLibro().getPrecioUnitario() * detalleReserva.getCantidad())*100.0)/100.0);
+                    valor_total += detalleReserva.getSubtotal();
+                }
+                valor_total = Math.round(valor_total*100.0)/100.0;
+                double saldo = Math.round((valor_total - entity.getAbono())*100.0)/100.0;
+                entity.setValorTotal(valor_total);
+                entity.setSaldo(saldo);
             }
-            valor_total = Math.round(valor_total*100.0)/100.0;
-            double saldo = Math.round((valor_total - entity.getAbono())*100.0)/100.0;
-            entity.setValorTotal(valor_total);
-            entity.setSaldo(saldo);
 
             if (entity.getIdReserva()!=null && (entity.getAbono() <= entity.getValorTotal() && entity.getAbono() > 0)) {
                 double saldo2 = Math.round((entity.getValorTotal() - entity.getAbono()) * 100.0) / 100.0;
@@ -122,6 +124,7 @@ public class ReservaServiceImpl implements ReservaService {
         }
     }
     @Override
+    @Transactional
     public List<Reserva> findByDate(String fecha) throws Exception {
         try{
             LocalDate localDate = LocalDate.parse(fecha);
@@ -132,6 +135,7 @@ public class ReservaServiceImpl implements ReservaService {
         }
     }
     @Override
+    @Transactional
     public List<Reserva> findByDateAbono(String fecha) throws Exception{
         try{
             LocalDate localDate = LocalDate.parse(fecha);
@@ -142,6 +146,7 @@ public class ReservaServiceImpl implements ReservaService {
         }
     }
     @Override
+    @Transactional
     public List<Reserva> findByDateCompleto(String fecha) throws Exception{
         try{
             LocalDate localDate = LocalDate.parse(fecha);

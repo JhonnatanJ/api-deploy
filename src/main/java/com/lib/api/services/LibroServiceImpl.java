@@ -202,6 +202,42 @@ public class LibroServiceImpl implements LibroService {
 
     @Override
     @Transactional
+    public List<Libro> findByDateSave(String fecha) throws Exception {
+        try{
+            LocalDate localDate = LocalDate.parse(fecha);
+            return libroRepository.findByDateSave(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<Libro> findByStockExist() throws Exception {
+        try{
+            List<Libro> entities = libroRepository.findByStockExist();
+            return entities;
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<Libro> findByStockEmpty() throws Exception {
+        try{
+            List<Libro> entities = libroRepository.findByStockEmpty();
+            return entities;
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
     public List<Libro> getAllByDateDESC() throws Exception {
         try{
             List<Libro> entities = libroRepository.getAllByDateDESC();

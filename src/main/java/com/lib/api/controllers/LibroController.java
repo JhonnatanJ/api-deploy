@@ -97,6 +97,36 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         }
     }
 
+    @GetMapping("/stock")
+    public ResponseEntity<?> getStock(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByStockExist());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/stockempty")
+    public ResponseEntity<?> getStockEmpty(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByStockEmpty());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+    @GetMapping("/fecha/{fecha}")
+    public ResponseEntity<?> getByDateSave(@PathVariable String fecha){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByDateSave(fecha));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+
     @GetMapping("/novedades")
     public ResponseEntity<?> getNovedades() {
         try{
