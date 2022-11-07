@@ -83,7 +83,6 @@ public class ReservaServiceImpl implements ReservaService {
                 entity.setSaldo(saldo2);
                 entity.setFechaAbono(LocalDate.now());
             }
-
             entity = reservaRepository.save(entity);
             return entity;
         }

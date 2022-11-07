@@ -40,7 +40,7 @@ public class Reserva {
     //------------------------------------------------------------------------------------------------------------------------------
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id_cuenta", updatable = false)
+    @JoinColumn(name = "id_cuenta")
     private Cuenta cuenta;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
