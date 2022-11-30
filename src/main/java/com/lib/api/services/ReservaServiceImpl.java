@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.Console;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +55,13 @@ public class ReservaServiceImpl implements ReservaService {
     @Transactional
     public Reserva save(Reserva entity) throws Exception {
         try {
+            if (entity.getIdReserva()!=null && (entity.getAbono() <= entity.getValorTotal() && entity.getAbono() > 0)) {
+                double saldo2 = Math.round((entity.getValorTotal() - entity.getAbono()) * 100.0) / 100.0;
+                entity.setSaldo(saldo2);
+                entity.setFechaAbono(LocalDate.now());
+                entity = reservaRepository.save(entity);
+                return entity;
+            }
             entity.setFechaCreacion(LocalDate.now());
             entity.setFechaAbono(LocalDate.now());
             entity.setCuenta(cuentaRepository.findById(entity.getCuenta().getIdCuenta()).get());
@@ -71,6 +79,7 @@ public class ReservaServiceImpl implements ReservaService {
                     detalleReserva.setLibro(libro);
                     detalleReserva.setSubtotal(Math.round((detalleReserva.getLibro().getPrecioUnitario() * detalleReserva.getCantidad())*100.0)/100.0);
                     valor_total += detalleReserva.getSubtotal();
+
                 }
                 valor_total = Math.round(valor_total*100.0)/100.0;
                 double saldo = Math.round((valor_total - entity.getAbono())*100.0)/100.0;
@@ -82,6 +91,8 @@ public class ReservaServiceImpl implements ReservaService {
                 double saldo2 = Math.round((entity.getValorTotal() - entity.getAbono()) * 100.0) / 100.0;
                 entity.setSaldo(saldo2);
                 entity.setFechaAbono(LocalDate.now());
+                entity = reservaRepository.save(entity);
+                return entity;
             }
             entity = reservaRepository.save(entity);
             return entity;
