@@ -57,6 +57,10 @@ public class LibroServiceImpl implements LibroService {
     public Libro save(Libro entity) throws Exception {
 
         try{
+            if(entity.getStock() <=0){
+                throw new Exception();
+            }
+
             List<Autor> autoresVerif = new ArrayList<>();
             List<Autor> autoresEntity = entity.getAutores();
             for (Autor autor: autoresEntity) {
@@ -111,8 +115,8 @@ public class LibroServiceImpl implements LibroService {
             entity.AddEditoriales(editorialesVerif);
             entity.AddAutores(autoresVerif);
             entity.AddGeneros(generosVerif);
-            entity = libroRepository.save(entity);
 
+            entity = libroRepository.save(entity);
             return entity;
         } catch (Exception e){
             throw new Exception(e.getMessage());
