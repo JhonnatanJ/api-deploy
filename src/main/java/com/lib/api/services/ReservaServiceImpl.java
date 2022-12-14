@@ -1,5 +1,6 @@
 package com.lib.api.services;
 
+import com.lib.api.entities.Cuenta;
 import com.lib.api.entities.DetalleReserva;
 import com.lib.api.entities.Libro;
 import com.lib.api.entities.Reserva;
@@ -86,13 +87,6 @@ public class ReservaServiceImpl implements ReservaService {
                 entity.setSaldo(saldo);
             }
 
-            if (entity.getIdReserva()!=null && (entity.getAbono() <= entity.getValorTotal() && entity.getAbono() > 0)) {
-                double saldo2 = Math.round((entity.getValorTotal() - entity.getAbono()) * 100.0) / 100.0;
-                entity.setSaldo(saldo2);
-                entity.setFechaAbono(LocalDate.now());
-                entity = reservaRepository.save(entity);
-                return entity;
-            }
             entity = reservaRepository.save(entity);
             return entity;
         }

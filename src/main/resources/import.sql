@@ -2,16 +2,19 @@
 
 INSERT INTO rol (nombre) VALUES	('ROLE_ADMINISTRADOR'),('ROLE_VENDEDOR');
 
-INSERT INTO usuario (ci, apellidos, nombres, telefono) VALUES ('0602447682', 'Bonilla', 'Jhonnatan', '0992016416');
+INSERT INTO usuario (ci, apellidos, nombres, telefono) VALUES ('0123456789', 'Online', 'Tienda', '');
+INSERT INTO usuario (ci, apellidos, nombres, telefono) VALUES ('0604536128', 'Bonilla', 'Jhonnatan', '0992016416');
 INSERT INTO usuario (ci, apellidos, nombres, telefono) VALUES ('1723117691', 'Barahona', 'Ivonne', '0996685513');
 INSERT INTO usuario (ci, apellidos, nombres, telefono) VALUES ('1750262717', 'Carrión', 'Gloria', '0991486609');
 
-INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a$10$.74HLgFMY1QrH6uBm3x0nOoOrRhVOqR5FdFjxZXYDJJzzLZe6RssC', 'jhonnatanbm@gmail.com', '2022-07-07', '0602447682', 1);
+INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a$10$.74HLgFMY1QrH6uBm3x0nOoOrRhVOqR5FdFjxZXYDJJzzLZe6RssC', 'tiendaonline@gmail.com', '2022-07-07', '0123456789', 1);
+INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a$10$.74HLgFMY1QrH6uBm3x0nOoOrRhVOqR5FdFjxZXYDJJzzLZe6RssC', 'jhonnatanbm@gmail.com', '2022-07-07', '0604536128', 1);
 INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a$10$TWvoGBe2Q4sU60pe3C9BGuLQYSyp1JZX2GfJt0tguUeWuFpQbK802', 'ivonneBP@gmail.com', '2022-07-25', '1723117691', 1);
 INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a$10$9RWABXSWpSYFoYR9xzRk1.Sn2dcM9pNEFlSyIUhd6mz1MvGdA43Hq', 'gatescc@hotmail.com', '2022-07-25', '1750262717', 1);
 
-INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (1, 1);
-INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (2, 2);
+INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (2, 1);
+INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (1, 2);
+INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (2, 3);
 INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (1, 3);
 
 -- -------------------------------------------------------------------------- LIBROS

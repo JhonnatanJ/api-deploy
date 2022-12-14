@@ -45,11 +45,12 @@ public class Reserva {
     @JoinColumn(name = "id_cuenta")
     private Cuenta cuenta;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne()
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "ci")
     private Usuario usuario;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinTable(
             name = "reserva_detalle",
             joinColumns =@JoinColumn(name = "id_reserva"),
