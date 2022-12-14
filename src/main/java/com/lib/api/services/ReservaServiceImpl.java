@@ -79,7 +79,6 @@ public class ReservaServiceImpl implements ReservaService {
                     detalleReserva.setLibro(libro);
                     detalleReserva.setSubtotal(Math.round((detalleReserva.getLibro().getPrecioUnitario() * detalleReserva.getCantidad())*100.0)/100.0);
                     valor_total += detalleReserva.getSubtotal();
-
                 }
                 valor_total = Math.round(valor_total*100.0)/100.0;
                 double saldo = Math.round((valor_total - entity.getAbono())*100.0)/100.0;

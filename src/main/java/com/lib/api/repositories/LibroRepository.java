@@ -66,4 +66,9 @@ public interface LibroRepository extends JpaRepository<Libro, String> {
             value = "SELECT l FROM Libro l JOIN l.generos g WHERE g.nombre LIKE %:genero%"
     )
     Page<Libro> findByGenero(@Param("genero") String genero, Pageable pageable);
+
+    @Query(
+            value = "SELECT l FROM Libro l WHERE l.titulo LIKE %:titulo%"
+    )
+    Page<Libro> findByTitulo(@Param("titulo") String titulo, Pageable pageable);
 }

@@ -38,5 +38,6 @@ public interface LibroService {
 
     public Page<Libro> findAll(Pageable pageable) throws Exception;
     public Page<Libro> findByGenero(String genero, Pageable pageable) throws Exception;
+    public Page<Libro> findByTitulo(String titulo, Pageable pageable) throws Exception;
 
 }

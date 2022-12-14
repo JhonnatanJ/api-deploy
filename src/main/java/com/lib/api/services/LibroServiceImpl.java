@@ -289,4 +289,15 @@ public class LibroServiceImpl implements LibroService {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    @Transactional
+    public Page<Libro> findByTitulo(String titulo, Pageable pageable) throws Exception{
+        try{
+            Page<Libro> entities = libroRepository.findByTitulo(titulo, pageable);
+            return entities;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }

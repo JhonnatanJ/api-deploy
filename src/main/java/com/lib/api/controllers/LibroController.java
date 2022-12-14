@@ -165,4 +165,13 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente mas tarde.\"}");
         }
     }
+
+    @GetMapping("/paged/titulo/{titulo}")
+    public ResponseEntity<?> getTitulo(@PathVariable String titulo, Pageable pageable) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByTitulo(titulo, pageable));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }
