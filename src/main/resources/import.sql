@@ -15,7 +15,7 @@ INSERT INTO cuenta (contrasena, email, fecha_creacion, ci, enabled) VALUES	('$2a
 INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (2, 1);
 INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (1, 2);
 INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (2, 3);
-INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (1, 3);
+INSERT INTO cuenta_rol (id_rol, id_cuenta) VALUES (1, 4);
 
 -- -------------------------------------------------------------------------- LIBROS
 
