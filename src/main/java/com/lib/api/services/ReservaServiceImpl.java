@@ -1,19 +1,14 @@
 package com.lib.api.services;
 
-import com.lib.api.entities.Cuenta;
-import com.lib.api.entities.DetalleReserva;
-import com.lib.api.entities.Libro;
-import com.lib.api.entities.Reserva;
-import com.lib.api.repositories.CuentaRepository;
-import com.lib.api.repositories.LibroRepository;
-import com.lib.api.repositories.ReservaRepository;
-import com.lib.api.repositories.UsuarioRepository;
+import com.lib.api.entities.*;
+import com.lib.api.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.io.Console;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +23,10 @@ public class ReservaServiceImpl implements ReservaService {
     private LibroRepository libroRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private NotaVentaRepository notaVentaRepository;
+    @Autowired
+    private NotaVentaServiceImpl notaVentaService;
 
     @Override
     @Transactional
@@ -59,8 +58,22 @@ public class ReservaServiceImpl implements ReservaService {
             if (entity.getIdReserva()!=null && (entity.getAbono() <= entity.getValorTotal() && entity.getAbono() > 0)) {
                 double saldo2 = Math.round((entity.getValorTotal() - entity.getAbono()) * 100.0) / 100.0;
                 entity.setSaldo(saldo2);
-                entity.setFechaAbono(LocalDate.now());
                 entity = reservaRepository.save(entity);
+                if(saldo2 == 0){
+                    NotaVenta notaVenta = new NotaVenta();
+                    notaVenta.setFechaRegistro(entity.getFechaAbono());
+                    notaVenta.setCuenta(entity.getCuenta());
+                    List<Detalle> listaDetalle = new ArrayList<>();
+                    for (DetalleReserva detalleReserva: entity.getDetalleReservas()) {
+                        Detalle detalle = new Detalle();
+                        detalle.setCantidad(detalleReserva.getCantidad());
+                        detalle.setLibro(detalleReserva.getLibro());
+                        listaDetalle.add(detalle);
+                    }
+                    notaVenta.setDetalles(listaDetalle);
+                    notaVentaService.save(notaVenta);
+                    delete(entity.getIdReserva());
+                }
                 return entity;
             }
             entity.setFechaCreacion(LocalDate.now());
