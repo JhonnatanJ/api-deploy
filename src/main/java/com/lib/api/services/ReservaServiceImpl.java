@@ -80,9 +80,10 @@ public class ReservaServiceImpl implements ReservaService {
             entity.setFechaAbono(LocalDate.now());
             entity.setCuenta(cuentaRepository.findById(entity.getCuenta().getIdCuenta()).get());
 
-            if(usuarioRepository.findById(entity.getUsuario().getCi()).isPresent()){
-                entity.setUsuario(usuarioRepository.findById(entity.getUsuario().getCi()).get());
+            if(!usuarioRepository.findById(entity.getUsuario().getCi()).isPresent()){
+                usuarioRepository.save(entity.getUsuario());
             }
+            entity.setUsuario(usuarioRepository.findById(entity.getUsuario().getCi()).get());
 
             if(entity.getIdReserva()==null){
                 double valor_total = 0;
