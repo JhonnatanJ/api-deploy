@@ -162,6 +162,19 @@ public class ReservaServiceImpl implements ReservaService {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    @Transactional
+    public List<Reserva> findByDateAbono2(String fechaI, String fechaF) throws Exception{
+        try{
+            LocalDate localDateI = LocalDate.parse(fechaI);
+            LocalDate localDateF = LocalDate.parse(fechaF);
+            return reservaRepository.findByDateAbono2(localDateI,localDateF);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
     @Override
     @Transactional
     public List<Reserva> findByDateCompleto(String fecha) throws Exception{

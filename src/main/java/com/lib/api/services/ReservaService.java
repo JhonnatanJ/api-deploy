@@ -18,6 +18,7 @@ public interface ReservaService {
     //====================================================================== CONSULTAS
     public List<Reserva> findByDate(String fecha) throws Exception;
     public List<Reserva> findByDateAbono(String fecha) throws Exception;
+    public List<Reserva> findByDateAbono2(String fechaI, String fechaF) throws Exception;
     public List<Reserva> findByDateCompleto(String fecha) throws Exception;
 
 }

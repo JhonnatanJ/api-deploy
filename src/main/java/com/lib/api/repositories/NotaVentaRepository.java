@@ -18,5 +18,10 @@ public interface NotaVentaRepository extends JpaRepository<NotaVenta,Long> {
     )
     List<NotaVenta> findByDate(@Param("fecha")LocalDate fecha);
 
+    @Query(
+            value = "SELECT nv from NotaVenta nv WHERE  nv.fechaRegistro BETWEEN :fechainicio AND :fechafin"
+    )
+    List<NotaVenta> findByDate2(@Param("fechainicio")LocalDate fechaI, @Param("fechafin") LocalDate fechaF);
+
 
 }

@@ -62,6 +62,19 @@ public class NotaVentaServiceImpl implements NotaVentaService {
 
     @Override
     @Transactional
+    public List<NotaVenta> findByDate2(String fechaI, String fechaF) throws Exception {
+        try{
+            LocalDate localDateI = LocalDate.parse(fechaI);
+            LocalDate localDateF = LocalDate.parse(fechaF);
+            return notaVentaRepository.findByDate2(localDateI, localDateF);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
     public NotaVenta save(NotaVenta entity) throws Exception {
         try{
             entity.setFechaRegistro(LocalDate.now());
