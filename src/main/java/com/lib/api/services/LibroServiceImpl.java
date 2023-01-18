@@ -111,7 +111,7 @@ public class LibroServiceImpl implements LibroService {
                 throw new Exception();
             }
 
-            entity.setFechaRegistro(LocalDate.now());
+            entity.setFechaStock(LocalDate.now());
             entity.AddEditoriales(editorialesVerif);
             entity.AddAutores(autoresVerif);
             entity.AddGeneros(generosVerif);
@@ -210,6 +210,19 @@ public class LibroServiceImpl implements LibroService {
         try{
             LocalDate localDate = LocalDate.parse(fecha);
             return libroRepository.findByDateSave(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<Libro> findByDateSave2(String fechaI, String fechaF) throws Exception {
+        try{
+            LocalDate localDateI = LocalDate.parse(fechaI);
+            LocalDate localDateF = LocalDate.parse(fechaF);
+            return libroRepository.findByDateSave2(localDateI, localDateF);
         }
         catch (Exception e){
             throw new Exception(e.getMessage());

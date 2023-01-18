@@ -40,6 +40,15 @@ public class NotaVentaController {
         }
     }
 
+    @GetMapping("/fecha/{fechainicio}/{fechafin}")
+    public ResponseEntity<?> getOne(@PathVariable String fechainicio, @PathVariable String fechafin) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(notaVentaServiceImpl.findByDate2(fechainicio, fechafin));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody NotaVenta entity){
         try{

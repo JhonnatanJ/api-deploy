@@ -28,6 +28,7 @@ public interface LibroService {
     public List<Libro> findByStockEmpty() throws Exception;
 
     public List<Libro> findByDateSave(String fecha) throws Exception;
+    public List<Libro> findByDateSave2(String fechaI, String fechaF) throws Exception;
 
     public List<Libro> getAllByDateDESC() throws Exception;
 

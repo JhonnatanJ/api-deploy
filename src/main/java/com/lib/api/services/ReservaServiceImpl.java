@@ -71,7 +71,7 @@ public class ReservaServiceImpl implements ReservaService {
                         listaDetalle.add(detalle);
                     }
                     notaVenta.setDetalles(listaDetalle);
-                    notaVentaService.save(notaVenta);
+                    notaVentaService.saveReserva(notaVenta,entity.getAbono());
                     delete(entity.getIdReserva());
                 }
                 return entity;
@@ -157,6 +157,19 @@ public class ReservaServiceImpl implements ReservaService {
         try{
             LocalDate localDate = LocalDate.parse(fecha);
             return reservaRepository.findByDateAbono(localDate);
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<Reserva> findByDateAbono2(String fechaI, String fechaF) throws Exception{
+        try{
+            LocalDate localDateI = LocalDate.parse(fechaI);
+            LocalDate localDateF = LocalDate.parse(fechaF);
+            return reservaRepository.findByDateAbono2(localDateI,localDateF);
         }
         catch (Exception e){
             throw new Exception(e.getMessage());

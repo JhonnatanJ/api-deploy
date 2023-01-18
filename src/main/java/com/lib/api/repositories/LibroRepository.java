@@ -35,7 +35,7 @@ public interface LibroRepository extends JpaRepository<Libro, String> {
     List<Libro> findByEditorial(@Param("editorial") String editorial);
 
     @Query(
-            value = "SELECT l FROM Libro l WHERE l.stock > 0"
+            value = "SELECT l FROM Libro l WHERE l.stock > 0 ORDER BY stock ASC"
     )
     List<Libro> findByStockExist();
 
@@ -45,20 +45,24 @@ public interface LibroRepository extends JpaRepository<Libro, String> {
     List<Libro> findByStockEmpty();
 
     @Query(
-            value = "SELECT l FROM Libro l ORDER BY FechaRegistro DESC"
+            value = "SELECT l FROM Libro l ORDER BY FechaStock DESC"
     )
     List<Libro> getAllByDateDESC();
 
     @Query(
-            value = "SELECT l FROM Libro l ORDER BY FechaRegistro ASC"
+            value = "SELECT l FROM Libro l ORDER BY FechaStock ASC"
     )
     List<Libro> getAllByDateASC();
 
     @Query(
-            value = "SELECT l FROM Libro l WHERE  l.fechaRegistro LIKE :fecha"
+            value = "SELECT l FROM Libro l WHERE  l.fechaStock LIKE :fecha"
     )
     List<Libro> findByDateSave(@Param("fecha") LocalDate fecha);
 
+    @Query(
+            value = "SELECT l FROM Libro l WHERE  l.fechaStock BETWEEN :fechainicio AND :fechafin"
+    )
+    List<Libro> findByDateSave2(@Param("fechainicio") LocalDate fechaI, @Param("fechafin") LocalDate fechaF);
 
     //-------------------------------------------------------------- PAGINADO
 

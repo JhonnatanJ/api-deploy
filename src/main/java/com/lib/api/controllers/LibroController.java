@@ -125,6 +125,15 @@ public ResponseEntity<?> getOne(@PathVariable String id) {
         }
     }
 
+    @GetMapping("/fecha/{fechai}/{fechaf}")
+    public ResponseEntity<?> getByDateSave2(@PathVariable String fechai, @PathVariable String fechaf){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(libroServiceImpl.findByDateSave2(fechai, fechaf));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 
 
     @GetMapping("/novedades")

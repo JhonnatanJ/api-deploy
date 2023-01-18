@@ -2,6 +2,7 @@ package com.lib.api.repositories;
 
 import com.lib.api.entities.NotaVenta;
 import com.lib.api.entities.Reserva;
+import org.apache.tomcat.jni.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,6 +22,11 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
             value = "SELECT r from Reserva r WHERE  r.fechaAbono LIKE :fecha"
     )
     List<Reserva> findByDateAbono(@Param("fecha") LocalDate fecha);
+
+    @Query(
+            value = "SELECT r from Reserva r WHERE  r.fechaAbono BETWEEN :inicio AND :fin"
+    )
+    List<Reserva> findByDateAbono2(@Param("inicio") LocalDate fechainicio, @Param("fin") LocalDate fechafin);
 
     @Query(
             value = "SELECT r from Reserva r WHERE  r.fechaAbono LIKE :fecha AND r.saldo = 0"

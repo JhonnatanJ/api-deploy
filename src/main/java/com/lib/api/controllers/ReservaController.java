@@ -78,6 +78,14 @@ public class ReservaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    @GetMapping("/abonos/{fechainicio}/{fechafin}")
+    public ResponseEntity<?> getByDateAbono2(@PathVariable String fechainicio, @PathVariable String fechafin){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(reservaServiceImpl.findByDateAbono2(fechainicio,fechafin));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
     @GetMapping("/liquidado/{fecha}")
     public ResponseEntity<?> getByDateCompleto(@PathVariable String fecha){
         try{
