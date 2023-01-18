@@ -11,6 +11,7 @@ public interface NotaVentaService {
     public List<NotaVenta> findByDate(String fecha) throws Exception;
     public List<NotaVenta> findByDate2(String fechaI, String fechaF) throws Exception;
     public NotaVenta save(NotaVenta entity) throws Exception;
+    public NotaVenta saveReserva(NotaVenta entity, Double valorTotal) throws Exception;
     public NotaVenta update(Long id, NotaVenta entity) throws Exception;
     public boolean delete(Long id) throws Exception;
 }

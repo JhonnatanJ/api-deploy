@@ -71,7 +71,7 @@ public class ReservaServiceImpl implements ReservaService {
                         listaDetalle.add(detalle);
                     }
                     notaVenta.setDetalles(listaDetalle);
-                    notaVentaService.save(notaVenta);
+                    notaVentaService.saveReserva(notaVenta,entity.getAbono());
                     delete(entity.getIdReserva());
                 }
                 return entity;

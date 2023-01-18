@@ -97,6 +97,26 @@ public class NotaVentaServiceImpl implements NotaVentaService {
             throw new Exception(e.getMessage());
         }
     }
+    @Override
+    @Transactional
+    public NotaVenta saveReserva(NotaVenta entity, Double valor_total) throws Exception {
+        try{
+            entity.setFechaRegistro(LocalDate.now());
+            entity.setCuenta(cuentaRepository.findById(entity.getCuenta().getIdCuenta()).get());
+            for (Detalle detalle: entity.getDetalles() ) {
+                Libro libro = libroRepository.findById(detalle.getLibro().getISBN()).get();
+                detalle.setLibro(libro);
+                detalle.setSubtotal(Math.round((detalle.getLibro().getPrecioUnitario() * detalle.getCantidad())*100.0)/100.0);
+            }
+            valor_total = Math.round(valor_total*100.0)/100.0;
+            entity.setValorTotal(valor_total);
+            entity = notaVentaRepository.save(entity);
+            return entity;
+        }
+        catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
     @Override
     @Transactional
