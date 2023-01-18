@@ -34,8 +34,8 @@ public class Libro implements Serializable {
     @Column(name = "precio_unitario", nullable = false, scale = 2)
     private Double precioUnitario;
 
-    @Column(name = "fecha_registro", nullable = false, updatable = false)
-    private LocalDate fechaRegistro;
+    @Column(name = "fecha_stock", nullable = false)
+    private LocalDate fechaStock;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(

@@ -111,7 +111,7 @@ public class LibroServiceImpl implements LibroService {
                 throw new Exception();
             }
 
-            entity.setFechaRegistro(LocalDate.now());
+            entity.setFechaStock(LocalDate.now());
             entity.AddEditoriales(editorialesVerif);
             entity.AddAutores(autoresVerif);
             entity.AddGeneros(generosVerif);
