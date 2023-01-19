@@ -22,6 +22,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers( "/favicon.ico").permitAll()
                 .antMatchers( "/static/favicon.ico").permitAll()
                 .antMatchers(HttpMethod.GET, "/geolib/libros/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/geolib/imagenes/**").permitAll()

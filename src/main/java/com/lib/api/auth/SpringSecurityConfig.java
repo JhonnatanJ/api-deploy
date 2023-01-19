@@ -40,6 +40,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .antMatchers( "/static/favicon.ico").permitAll()
+                .antMatchers( "/favicon.ico").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
