@@ -22,6 +22,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers( "/favicon.ico").permitAll()
                 .antMatchers(HttpMethod.GET, "/geolib/libros/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/geolib/imagenes/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/geolib/imagenes/**").permitAll()
@@ -32,6 +33,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().cors().configurationSource(corsConfigurationSource());
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
